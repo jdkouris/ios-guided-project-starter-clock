@@ -27,9 +27,9 @@ class ClockView: UIView {
     // Used to sync timing of animation events to the refresh rate of the display
     private var animationTimer: CADisplayLink?
     
-    /// Tracks the current timezone of the clock.
-    /// Automatically configures the timer to run in sync with the screen
-    /// and update the face each second.
+    // Tracks the current timezone of the clock.
+    // Automatically configures the timer to run in sync with the screen
+    // and update the face each second.
     var timezone: TimeZone? {
         didSet {
             let aTimer = CADisplayLink(target: self, selector: #selector(timerFired(_:)))
@@ -86,12 +86,17 @@ class ClockView: UIView {
     }
     
     override func draw(_ rect: CGRect) {
-        /// Note: elements are drawn on the the screen from back to front
-        /// in the order they appear below.
+        // Note: elements are drawn on the the screen from back to front
+        // in the order they appear below.
         
         if let context = UIGraphicsGetCurrentContext() {
             
             // clock face
+            context.addRect(rect)
+            context.setFillColor(UIColor.red.cgColor)
+            
+            // This is the method that actually draws on the screen
+            context.fillPath()
             
             // clock's border
             
