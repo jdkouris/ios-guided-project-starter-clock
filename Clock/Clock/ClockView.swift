@@ -89,16 +89,29 @@ class ClockView: UIView {
         // Note: elements are drawn on the the screen from back to front
         // in the order they appear below.
         
+        // The context is the canvas on which we draw things
         if let context = UIGraphicsGetCurrentContext() {
             
             // clock face
-            context.addRect(rect)
-            context.setFillColor(UIColor.red.cgColor)
+            // An ellipse is a circle or oval
+            context.addEllipse(in: rect)
+            context.setFillColor(clockBgColor.cgColor)
             
             // This is the method that actually draws on the screen
             context.fillPath()
             
             // clock's border
+            let insetCircleRect = CGRect(x: rect.origin.x + borderWidth / 2,
+                                         y: rect.origin.y + borderWidth / 2,
+                                         width: rect.size.width - borderWidth,
+                                         height: rect.size.height - borderWidth)
+            
+            context.addEllipse(in: insetCircleRect)
+            context.setStrokeColor(borderColor.cgColor)
+            context.setLineWidth(borderWidth)
+            
+            // This draws the border on the screen
+            context.strokePath()
             
             // numerals
 //            let clockCenter = CGPoint(x: rect.size.width / 2.0,
