@@ -139,15 +139,53 @@ class ClockView: UIView {
             }
             
             // minute hand
+            context.move(to: clockCenter)
+            context.addLine(to: minuteHandEndPoint)
+            
+            context.setLineWidth(minutes.width)
+            context.setStrokeColor(minutes.color.cgColor)
+            
+            context.strokePath()
             
             // hour hand
+            context.move(to: clockCenter)
+            context.addLine(to: hourHandEndPoint)
+            
+            context.setLineWidth(hours.width)
+            context.setStrokeColor(hours.color.cgColor)
+            
+            context.strokePath()
             
             // hour/minute's center
+            let radius: CGFloat = 6
+            
+            let centerCircleRect = CGRect(x: clockCenter.x - radius,
+                                          y: clockCenter.y - radius,
+                                          width: radius * 2,
+                                          height: radius * 2)
+            
+            context.setFillColor(hours.color.cgColor)
+            context.addEllipse(in: centerCircleRect)
+            
+            context.fillPath()
             
             // second hand
+            context.move(to: clockCenter)
+            context.addLine(to: secondHandEndPoint)
+            
+            context.setStrokeColor(seconds.color.cgColor)
+            context.setLineWidth(seconds.width)
+            
+            context.strokePath()
             
             // second's center
+            let secondRadius: CGFloat = 3
             
+            let secondCircleRect = CGRect(x: clockCenter.x - secondRadius, y: clockCenter.y - secondRadius, width: secondRadius * 2, height: secondRadius * 2)
+            
+            context.addEllipse(in: secondCircleRect)
+            context.setFillColor(seconds.color.cgColor)
+            context.fillPath()
         }
     }
     
