@@ -213,7 +213,8 @@ class ClockView: UIView {
     deinit {
         // Animation timer is removed from the current run loop when this view object
         // is deallocated.
-        animationTimer?.remove(from: .current, forMode: .common)
+//        animationTimer?.remove(from: .current, forMode: .common)
+        animationTimer?.invalidate()
     }
     
     // MARK: - Private
